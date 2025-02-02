@@ -1,0 +1,13 @@
+STEPS FOR CREATING A GUI (jframe) 
+-------------------------
+1. create an instance of jframe
+2. create an instance of components
+3. add components to the jframe
+ 
+ JOPTION PANE
+ -------------
+ This is  is a class provided by the Swing library that allows developers to 
+ create standard dialog boxes for user interaction. It is part of the javax.swing package
+  and is commonly used for displaying messages, asking for input, or confirming actions within a graphical user interface (GUI).
+
+  the JOPTION method return a string
