@@ -59,7 +59,7 @@ public class LogInCheck {
                 txtPassword.setText("");  
             }
         });
-        loginFrame.getContentPane().setBackground(new java.awt.Color(255, 182, 193)); // Pale Pink
+        loginFrame.getContentPane().setBackground(new java.awt.Color(255, 182, 193));  
 
         loginFrame.setVisible(true);
     }
@@ -72,7 +72,7 @@ public class LogInCheck {
 
         JLabel lblWelcome = new JLabel("Welcome to the Home Page!");
         lblWelcome.setBounds(100, 100, 200, 25);
-        homeFrame.getContentPane().setBackground(new java.awt.Color(255, 182, 193)); // Pale Pink
+        homeFrame.getContentPane().setBackground(new java.awt.Color(255, 182, 193));  
 
         homeFrame.add(lblWelcome);
 
