@@ -1,0 +1,10 @@
+Java Database Connectivity 
+-------------------------------
+-Database
+Steps of how to connect a java program to Database
+--------------------------------------------------
+Step1; Load JDBC Driver for your Database
+Step2; Establish Connection to the Database (URL, Username, Password)
+Step3; Prepare Statement
+Step4; Execute queries
+Step5; Process the results

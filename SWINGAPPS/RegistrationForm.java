@@ -49,7 +49,7 @@ public class RegistrationForm {
         rbMale.setBounds(340, 210, 80, 30); 
         rbMale.setBackground(new java.awt.Color(255, 105, 180));     
 
-        // Grouping radio buttons to avoid selection of multiple choices 
+        // Grouping radio buttons  to avoid selection of multiple choices
         ButtonGroup genderGroup = new ButtonGroup();
         genderGroup.add(rbFemale);
         genderGroup.add(rbMale);
@@ -116,6 +116,7 @@ public class RegistrationForm {
                 String FirstName = txtFirstName.getText();
                 String LastName = txtLastName.getText();
                 int age = Integer.parseInt(txtAge.getText());
+               
                 String Gender = "";
                 if(rbFemale.isSelected()){
                     Gender = "Female";
