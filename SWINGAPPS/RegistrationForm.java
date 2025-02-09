@@ -100,7 +100,6 @@ public class RegistrationForm {
         empForm.add(chkVolleyball);
         empForm.add(chkCricket);
         empForm.add(chkSwimming); 
-
         empForm.add(lblDepartment);
         empForm.add(cmbDepartment);
         empForm.add(chkTerms);
@@ -113,7 +112,48 @@ public class RegistrationForm {
         btnSave.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) { 
+                String ID = txtID.getText();
+                String FirstName = txtFirstName.getText();
+                String LastName = txtLastName.getText();
+                int age = Integer.parseInt(txtAge.getText());
+                String Gender = "";
+                if(rbFemale.isSelected()){
+                    Gender = "Female";
+                }
+                if(rbMale.isSelected()){
+                    Gender = "Male";
+                }
+                Long Salary = Long.parseLong(txtSalary.getText());
+                String Department = cmbDepartment.getSelectedItem().toString();
                 JOptionPane.showMessageDialog(empForm, "Form submitted!");
+                String Hobbies = "";
+                if(chkFootball.isSelected()){
+                    Hobbies = Hobbies + "FootBall";
+                }
+                if(chkVolleyball.isSelected()){
+                    Hobbies = Hobbies + "VolleyBall";
+                }
+                if(chkCricket.isSelected()){
+                    Hobbies = Hobbies + "Cricket";
+                }
+                if(chkSwimming.isSelected()){
+                    Hobbies = Hobbies + "Swimming";
+                }
+
+                boolean Terms = false;
+                if(chkTerms.isSelected()){
+                    Terms = true;
+                }
+                // Display entered info 
+                System.out.println("Employee ID:" +ID);
+                System.out.println("First Name:" +FirstName);
+                System.out.println("Last Name:" +LastName);
+                System.out.println("Age:" +age);
+                System.out.println("Gender:" +Gender);
+                System.out.println("Salary:" +Salary);
+                System.out.println("Department:" +Department);
+                System.out.println("Hobbies:" +Hobbies);
+                System.out.println("Confirmation:" +Terms);
 
 
             }
