@@ -8,3 +8,13 @@ Step2; Establish Connection to the Database (URL, Username, Password)
 Step3; Prepare Statement
 Step4; Execute queries
 Step5; Process the results
+
+Maven coordinated;
+
+<!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+<dependency>
+    <groupId>org.postgresql</groupId>
+    <artifactId>postgresql</artifactId>
+    <version>42.7.5</version>
+</dependency>
+

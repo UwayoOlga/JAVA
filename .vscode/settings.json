@@ -1,3 +1,10 @@
 {
-    "java.debug.settings.onBuildFailureProceed": true
+    "java.debug.settings.onBuildFailureProceed": true,
+    "java.project.sourcePaths": [
+        "JDBC\\testingproject\\src",
+        "SWINGAPPS"
+    ],
+    "java.project.referencedLibraries": [
+        "JDBC\\lib\\postgresql-42.7.3.jar"
+    ]
 }
