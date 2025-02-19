@@ -36,8 +36,7 @@ public class App {
                 System.out.println("ID: " + id + ", Username: " + username + 
                                    ", Password: " + userPassword + ", Status: " + status);
             }
-
-            // Close resources
+ 
             rs.close();
             stm.close();
             connection.close();

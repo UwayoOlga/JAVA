@@ -4,7 +4,13 @@
         "JDBC\\testingproject\\src",
         "SWINGAPPS"
     ],
-    "java.project.referencedLibraries": [
-        "JDBC\\lib\\postgresql-42.7.3.jar"
-    ]
+    "java.project.referencedLibraries": {
+        "include": [
+            "JDBC\\lib\\postgresql-42.7.3.jar",
+            "c:\\Users\\HP\\Desktop\\6th\\JDBCDriver\\JDBCDriver\\ojdbc8-12.2.0.1.jar"
+        ],
+        "exclude": [
+            "JDBC/lib/postgresql-42.7.3.jar"
+        ]
+    }
 }
