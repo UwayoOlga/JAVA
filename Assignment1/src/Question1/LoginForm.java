@@ -91,7 +91,7 @@ public class LoginForm extends JFrame {
                     JOptionPane.showMessageDialog(this, "Your account is disabled!");
                 }
             } else {
-                JOptionPane.showMessageDialog(this, "Invalid Username or Password!");
+                JOptionPane.showMessageDialog(this, "Wrong username/ password. Try again");
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, "Database Error: " + e.getMessage());
