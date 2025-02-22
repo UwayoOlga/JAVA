@@ -86,7 +86,12 @@ public class LoginForm extends JFrame {
             if (rs.next()) {
                 String status = rs.getString("STATUS");
                 if ("E".equals(status)) {
+                    // Show the NewEmployeeForm when authenticated and enabled
                     JOptionPane.showMessageDialog(this, "Welcome to the Employee System!");
+                    // Close the login form
+                    this.dispose();
+                    // Open NewEmployeeForm
+                    new NewEmployeeForm().setVisible(true);
                 } else {
                     JOptionPane.showMessageDialog(this, "Your account is disabled!");
                 }
@@ -97,6 +102,7 @@ public class LoginForm extends JFrame {
             JOptionPane.showMessageDialog(this, "Database Error: " + e.getMessage());
         }
     }
+
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new LoginForm().setVisible(true));
