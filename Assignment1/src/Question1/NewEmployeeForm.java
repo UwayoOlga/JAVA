@@ -120,22 +120,55 @@ public class NewEmployeeForm extends JFrame {
         if (swimmingCheckBox.isSelected()) hobbies += "Swimming, ";
         if (!hobbies.isEmpty()) hobbies = hobbies.substring(0, hobbies.length() - 2);
 
+        // Get basic salary
+        double basicSalary = Double.parseDouble(basicSalaryField.getText());
+
+        // Calculate allowance based on department
+        double allowance = 0;
+        String department = (String) departmentComboBox.getSelectedItem();
+        if ("IT".equals(department)) {
+            allowance = 100000; // For IT Staff
+        }
+
+        // Calculate deductions (3% of basic salary)
+        double deductions = 0.03 * basicSalary;
+
+        // Calculate gross salary
+        double grossSalary = basicSalary + allowance;
+
+        // Calculate net salary
+        double netSalary = grossSalary - deductions;
+
+        // Save to the database
         try (Connection conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD)) {
             conn.setAutoCommit(false);
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO employee (employee_id, first_name, last_name, age, mobile_phone, email, social_sec_no, gender, department, hobbies) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-            stmt.setString(1, employeeIdField.getText());
-            stmt.setString(2, firstNameField.getText());
-            stmt.setString(3, lastNameField.getText());
-            stmt.setInt(4, Integer.parseInt(ageField.getText()));
-            stmt.setString(5, mobilePhoneField.getText());
-            stmt.setString(6, emailField.getText());
-            stmt.setString(7, socialSecurityField.getText());
-            stmt.setString(8, maleRadioButton.isSelected() ? "Male" : "Female");
-            stmt.setString(9, (String) departmentComboBox.getSelectedItem());
-            stmt.setString(10, hobbies);
-            stmt.executeUpdate();
+
+            // Save personal details to employee table
+            PreparedStatement personalStmt = conn.prepareStatement("INSERT INTO employee (employee_id, first_name, last_name, age, mobile_phone, email, social_sec_no, gender, department, hobbies) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            personalStmt.setString(1, employeeIdField.getText());
+            personalStmt.setString(2, firstNameField.getText());
+            personalStmt.setString(3, lastNameField.getText());
+            personalStmt.setInt(4, Integer.parseInt(ageField.getText()));
+            personalStmt.setString(5, mobilePhoneField.getText());
+            personalStmt.setString(6, emailField.getText());
+            personalStmt.setString(7, socialSecurityField.getText());
+            personalStmt.setString(8, maleRadioButton.isSelected() ? "Male" : "Female");
+            personalStmt.setString(9, department);
+            personalStmt.setString(10, hobbies);
+            personalStmt.executeUpdate();
+
+            // Save salary details to salary_data table
+            PreparedStatement salaryStmt = conn.prepareStatement("INSERT INTO salary_data (employee_id, basic_salary, allowance, deductions, gross_salary, net_salary) VALUES (?, ?, ?, ?, ?, ?)");
+            salaryStmt.setString(1, employeeIdField.getText());
+            salaryStmt.setDouble(2, basicSalary);
+            salaryStmt.setDouble(3, allowance);
+            salaryStmt.setDouble(4, deductions);
+            salaryStmt.setDouble(5, grossSalary);
+            salaryStmt.setDouble(6, netSalary);
+            salaryStmt.executeUpdate();
+
             conn.commit();
-            JOptionPane.showMessageDialog(this, "Employee details saved successfully!");
+            JOptionPane.showMessageDialog(this, "Employee details and salary saved successfully!");
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, "Database Error: " + e.getMessage());
         }
