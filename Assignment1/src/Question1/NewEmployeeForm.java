@@ -1,14 +1,14 @@
-package Question1;
-
 import javax.swing.*;
 import java.awt.*;
 import java.sql.*;
+import config.ConfigLoader; // Import ConfigLoader
 
 public class NewEmployeeForm extends JFrame {
 
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/employee_management";
-    private static final String DB_USERNAME = "root";
-    private static final String DB_PASSWORD = "California123!";
+    // Use ConfigLoader to get the values from the .env file
+    private static final String DB_URL = ConfigLoader.getProperty("DB_URL");
+    private static final String DB_USERNAME = ConfigLoader.getProperty("DB_USERNAME");
+    private static final String DB_PASSWORD = ConfigLoader.getProperty("DB_PASSWORD");
 
     public NewEmployeeForm() {
         setTitle("New Employee Form");

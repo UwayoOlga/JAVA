@@ -4,12 +4,14 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
+import config.ConfigLoader;
 
 public class OnlineBookstoreSystem extends JFrame {
     // Database connection details
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/online_bookstore_system";
-    private static final String DB_USERNAME = "root";
-    private static final String DB_PASSWORD = "California123!";
+    private static final String DB_URL = ConfigLoader.getProperty("DB_URL");
+    private static final String DB_USERNAME = ConfigLoader.getProperty("DB_USERNAME");
+    private static final String DB_PASSWORD = ConfigLoader.getProperty("DB_PASSWORD");
+
 
     // GUI components
     private JTextField searchField;

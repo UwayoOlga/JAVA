@@ -1,5 +1,6 @@
 package Question1;
 
+import config.ConfigLoader;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -11,18 +12,13 @@ public class LoginForm extends JFrame {
     private JPasswordField passwordField;
     private JButton loginButton, clearButton;
 
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/employee_management";
-    private static final String DB_USERNAME = "root";
-    private static final String DB_PASSWORD = "California123!";
-
     public LoginForm() {
         setTitle("Login Form");
         setLayout(null);
         setSize(700, 350);
-        getContentPane().setBackground(new Color(255, 182, 193)); // Light Pink Background
+        getContentPane().setBackground(new Color(255, 182, 193));  
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-
 
         // Labels
         JLabel lblUsername = new JLabel("Username:");
@@ -35,20 +31,19 @@ public class LoginForm extends JFrame {
         // Text Fields
         usernameField = new JTextField();
         usernameField.setFont(new Font("Arial", Font.PLAIN, 16));
-        usernameField.setBounds(300, 100, 150, 30); // Touch label
+        usernameField.setBounds(300, 100, 150, 30);
         passwordField = new JPasswordField();
         passwordField.setFont(new Font("Arial", Font.PLAIN, 16));
-        passwordField.setBounds(300, 130, 150, 30); // Touch label
-
+        passwordField.setBounds(300, 130, 150, 30);
 
         // Buttons
         loginButton = new JButton("Login");
         loginButton.setFont(new Font("Arial", Font.PLAIN, 16));
-        loginButton.setBounds(250, 200, 100, 30); // Adjusted, centered
+        loginButton.setBounds(250, 200, 100, 30);
         loginButton.setBackground(new Color(255, 105, 180));
         clearButton = new JButton("Clear");
         clearButton.setFont(new Font("Arial", Font.PLAIN, 16));
-        clearButton.setBounds(370, 200, 100, 30); // Adjusted, centered
+        clearButton.setBounds(370, 200, 100, 30);
         clearButton.setBackground(new Color(255, 105, 180));
 
         add(lblUsername);
@@ -75,8 +70,12 @@ public class LoginForm extends JFrame {
     private void loginUser() {
         String username = usernameField.getText();
         String password = new String(passwordField.getPassword());
+ 
+        String dbUrl = ConfigLoader.getProperty("DB_URL");
+        String dbUsername = ConfigLoader.getProperty("DB_USERNAME");
+        String dbPassword = ConfigLoader.getProperty("DB_PASSWORD");
 
-        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD)) {
+        try (Connection conn = DriverManager.getConnection(dbUrl, dbUsername, dbPassword)) {
             String sql = "SELECT STATUS FROM USERS WHERE USER_NAME = ? AND USER_PASSWORD = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, username);
@@ -86,23 +85,19 @@ public class LoginForm extends JFrame {
             if (rs.next()) {
                 String status = rs.getString("STATUS");
                 if ("E".equals(status)) {
-                    // Show the NewEmployeeForm when authenticated and enabled
                     JOptionPane.showMessageDialog(this, "Welcome to the Employee System!");
-                    // Close the login form
                     this.dispose();
-                    // Open NewEmployeeForm
                     new NewEmployeeForm().setVisible(true);
                 } else {
                     JOptionPane.showMessageDialog(this, "Your account is disabled!");
                 }
             } else {
-                JOptionPane.showMessageDialog(this, "Wrong username/ password. Try again");
+                JOptionPane.showMessageDialog(this, "Wrong username/password. Try again.");
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, "Database Error: " + e.getMessage());
         }
     }
-
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new LoginForm().setVisible(true));
